@@ -1,0 +1,19 @@
+.wrap p {
+    max-width: 600px;
+}
+
+#log {
+    background-color: #e5e5e5;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: Monaco, monospace;
+    line-height: 1.5;
+    max-height: 70vh;
+    overflow: auto;
+    padding: 1em;
+}
+
+.button+p {
+    margin-top: 0;
+}
