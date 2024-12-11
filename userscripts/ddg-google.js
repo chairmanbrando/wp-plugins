@@ -3,7 +3,7 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://duckduckgo.com/*
 // @grant       none
-// @version     1.7
+// @version     1.7.1
 // @author      chairmanbrando
 // @require     https://raw.githubusercontent.com/uzairfarooq/arrive/master/minified/arrive.min.js
 // @description Added a clickable link to Google in case you forget your `!g`. Typing a "g" without anything having keyboard focus will also send you there! Finally, you can use the 1-9 keys to go to the respective search results while still on DDG.
@@ -14,14 +14,15 @@
 const google = 'https://www.google.com/search?q=' + encodeURIComponent(document.querySelector('#search_form_input').value);
 
 // On hitting a key, go to Google with your query or one of the found links.
+// Only do this if there's nothing else focused, though.
 document.body.addEventListener('keyup', (e) => {
-    if (e.target === document.body) {
-        if (e.keyCode === 71) { // G key!
-            window.location.href = google;
-        }
+    if (e.target !== document.body) return;
+
+    if (e.keyCode === 71) { // G key!
+        window.location.href = google;
     }
 
-    // The links, too, don't exist on `DOMContentLoaded`. 🙄
+    // The links also don't seem to exist on `DOMContentLoaded`. 🤨
     const links = document.body.querySelectorAll('ol li:has(article)');
     const link = links[e.keyCode - 49].querySelector('h2 a[href]');
 
