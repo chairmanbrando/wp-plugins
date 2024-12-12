@@ -1,0 +1,62 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: var(--ssa-background, #39414e);
+    font: 16px/24px Roboto, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+main {
+    background-color: var(--ssa-main-background, transparent);
+    color: var(--ssa-main-color, #fff);
+    margin: 10vh auto;
+    max-width: 600px;
+    padding: 1rem;
+    width: 94%;
+}
+
+figure {
+    margin: 0 0 2rem 0;
+}
+
+form {
+    text-align: center;
+}
+
+    form p + .field {
+        margin-top: -0.5em;
+    }
+
+    form input {
+        color: var(--ssa-background, #39414e);
+        font-family: inherit;
+        font-size: inherit;
+    }
+
+        form input::placeholder {
+            color: #ccc;
+            font-style: italic;
+        }
+
+@media (min-width: 768px) {
+    main {
+        left: 50%;
+        margin: 0;
+        padding: 2rem 4rem;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

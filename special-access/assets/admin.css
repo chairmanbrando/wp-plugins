@@ -1,0 +1,56 @@
+.wrap :where(p, ul, ol) {
+    font-size: 14px;
+    max-width: 600px
+}
+
+    .wrap p br {
+        display: none;
+    }
+
+    @media (min-width: 783px) {
+        .wrap p br {
+            display: inline;
+        }
+    }
+
+.wrap ul {
+    list-style: initial;
+    padding-left: 2rem;
+}
+
+.wrap h3 {
+    margin-top: 2rem;
+}
+
+.wrap input[type="url"] {
+    max-width: 378px;
+}
+
+.wrap p.error {
+    font-weight: bold;
+}
+
+    .wrap p.error::before {
+        content: 'Error: ';
+    }
+
+.wrap hr {
+    margin: 2rem 0;
+    max-width: 600px;
+}
+
+.wrap .passcodes {
+    font-family: Monoco, Consolas, monospace;
+}
+
+.wrap pre {
+    background-color: rgba(0, 0, 0, 0.1);
+    font-family: Monoco, Consolas, monospace;
+    max-width: 500px;
+    overflow-x: auto;
+    padding: 1rem;
+}
+
+.wrap form-table th {
+    padding: 10px;
+}
