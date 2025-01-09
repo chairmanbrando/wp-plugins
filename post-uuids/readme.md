@@ -4,7 +4,7 @@ So, you want to style a page or post and then duplicate it, eh? Good luck!
 
 - Problem 2: Using a post's title for styling means renaming or even setting that post to private causes your styles to break.
 
-- Problem 3: Using a post's slug *can* work so it doesn't necessarily change with a title change, but duplication does change it, breaking your styles, if only temporarily.
+- Problem 3: Using a post's slug *can* work since it doesn't necessarily change with a title change, but duplication does change it, breaking your styles if only temporarily.
 
 - Problem 4: Requiring a template to be used for every post just to apply some class for styling is quite a silly solution.
 
