@@ -15,6 +15,7 @@ class SocialifyImages {
     private $blob;
     private $mime;
     private $type;
+    private $name;
     private $maxw;
     private $maxh;
 
@@ -30,6 +31,7 @@ class SocialifyImages {
         $this->blob = null;
         $this->mime = null;
         $this->type = null;
+        $this->name = null;
 
         add_shortcode('socialify_form', [$this, 'socialify_form']);
     }
@@ -61,6 +63,7 @@ class SocialifyImages {
         $this->blob = base64_encode($magic->getImageBlob());
         $this->mime = $magic->getImageMimeType();
         $this->type = $type;
+        $this->name = sanitize_title($_FILES['image']['name']) . '-socialified';
 
         return $magic->clear();
     }

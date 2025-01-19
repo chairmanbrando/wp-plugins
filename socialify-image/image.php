@@ -15,10 +15,10 @@ $data = sprintf('data:%s;base64,%s', $this->mime, $this->blob);
 
 $template = <<<END
     <figure>
-        <a href="%s" download="socialified.%s">
+        <a href="%s" download="%s.%s">
             <img class="alignnone" src="%s" alt="%s">
         </a>
     </figure>
 END;
 
-printf($template, $data, strtolower($this->type), $data, __('Your uploaded image but smaller and without EXIF data.'));
+printf($template, $data, $this->name, strtolower($this->type), $data, __('Your uploaded image but smaller and without EXIF data.'));
