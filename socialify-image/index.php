@@ -4,7 +4,7 @@
  * Plugin Name: Socialify Images
  * Description: Upload a bulky image full of EXIF data and get back a 1200px JPEG or PNG cleaned of extraneous data.
  * Author: chairmanbrando
- * Version: 0.1.0
+ * Version: 0.1.1
  * Update URI: false
  * Requires PHP: 7.4
  */
@@ -69,25 +69,27 @@ class SocialifyImages {
     }
 
     private function resize(&$image, $type) {
-        $ow = $image->getImageWidth();
-        $oh = $image->getImageHeight();
+        $ow = $nw = $image->getImageWidth();
+        $oh = $nh = $image->getImageHeight();
 
         $image->setImageFormat($type);
 
         if ($type === 'JPEG') {
-            $image->setCompressionQuality(86);
+            $image->setCompressionQuality(75);
         }
 
         // Set new width and height while keeping aspect ratio.
-        if ($ow > $this->maxw || $oh > $this->maxh) {
-            if ($ow > $this->maxw) {
-                $nw = $this->maxw;
-                $nh = ($this->maxw / $ow) * $oh;
-            } else {
-                $nh = $this->maxh;
-                $nw = ($this->maxh / $oh) * $ow;
-            }
+        if ($ow / $oh > 1 && $ow > $this->maxw) {
+            $nw = $this->maxw;
+            $nh = ($this->maxw / $ow) * $oh;
+        }
 
+        if ($ow / $oh <= 1 && $oh > $this->maxh) {
+            $nh = $this->maxh;
+            $nw = ($this->maxh / $oh) * $ow;
+        }
+
+        if ($nw !== $ow) {
             // Lanczos is slow but much better than `scaleImage()`.
             $image->resizeImage($nw, $nh, Imagick::FILTER_LANCZOS, 1);
         }
