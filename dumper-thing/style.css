@@ -1,0 +1,18 @@
+pre.xdebug-var-dump,
+pre.dump {
+    background-color: rgba(0,0,0, 0.1);
+    font-size: 13px;
+    margin-top: var(--wp--style--block-gap, 1rem);
+    margin-bottom: var(--wp--style--block-gap, 1rem);
+    overflow-x: auto;
+    padding: 1rem;
+}
+
+    body.wp-admin #wpwrap > pre.xdebug-var-dump,
+    body.wp-admin #wpwrap > pre.dump {
+        margin-left: 160px;
+
+        &:last-of-type {
+            padding-bottom: 4rem;
+        }
+    }
