@@ -12,11 +12,11 @@
  */
 
 add_action('login_footer', function () {
-    ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', (e) => {
-            document.querySelector('#rememberme').checked = true;
-        });
-    </script>
-    <?php
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', (e) => {
+            document.querySelector('#rememberme').checked = true;
+        });
+    </script>
+    <?php
 });
