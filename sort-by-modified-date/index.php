@@ -27,12 +27,16 @@ class SortByModifiedDate {
     public static function admin_head() {
         echo <<<STYLE
             <style>
-                table.fixed .column-date,
-                table.fixed .column-modified {
-                    width: 15%;
+                .wp-list-table.fixed .column-date,
+                .wp-list-table.fixed .column-modified {
+                    width: 13%;
                 }
-                table.fixed .column-word-count {
-                    width: 7.5%;
+                .wp-list-table.fixed .column-categories,
+                .wp-list-table.fixed .column-tags {
+                    width: 7%;
+                }
+                .wp-list-table.fixed .column-word-count {
+                    width: 6%;
                 }
             </style>
         STYLE;
