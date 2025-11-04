@@ -101,7 +101,7 @@ class DebugFileViewer {
 
         $file->seek(PHP_INT_MAX);
 
-        $lines = new \LimitIterator($file, $file->key() - $num, $file->key());
+        $lines = new \LimitIterator($file, max(0, $file->key() - $num), $file->key());
         $lines = iterator_to_array($lines);
         $file  = null;
 
