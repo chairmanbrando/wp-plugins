@@ -2,9 +2,9 @@
 
 <div class="wrap">
     <h1><?= __('Debug File Viewer') ?></h1>
-    <p><?= __(sprintf('Since you have both <code>WP_DEBUG</code> and <code>WP_DEBUG_LOG</code> enabled, some of your debug file is shown below. This is currently limited to last %s lines because because of reasons. You can change this by adding a <code>DFV_MAX_LINES</code> constant to your config file or with the <code>dfv_max_lines</code> filter.', self::$lines)) ?></p>
+    <p><?= __(sprintf('Since you have both <code>WP_DEBUG</code> and <code>WP_DEBUG_LOG</code> enabled, some of your debug file is shown below. This is currently limited to last %s lines because because of reasons. You can change this by adding a <code>DFV_MAX_LINES</code> constant to your config file or with the <code>dfv_max_lines</code> filter.', self::$maxlines)) ?></p>
     <p><?= __('For your convenience, (a) the output has been scrolled to the bottom if needed to show the most recent items, and (2) lines that contain a fatal or parse error have been highlighted. If you need to see the full file, use the view or download buttons below.') ?></p>
-    <h2><?= self::$filepath ?> (<?= self::$filesize ?>)</h2>
+    <h2><?= self::$filepath ?>: <?= self::$curlines ?> lines @ <?= self::$filesize ?> file size</h2>
     <pre id="log"><?= $lines ?></pre>
     <h2><?= __('Actions') ?></h2>
     <p><?= __("Note: Some hosts block web access to <code>.log</code> files or at least the default <code>debug.log</code> file. If that's the case on your host, the view and download buttons below won't work. Even if not blocked, the view button may download the file anyway.") ?></p>
@@ -21,7 +21,5 @@
 </div>
 
 <script>
-    jQuery(function ($) {
-        $('#log').scrollTop(9999);
-    });
+    jQuery(($) => $('#log').scrollTop(9999));
 </script>
