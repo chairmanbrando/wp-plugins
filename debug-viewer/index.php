@@ -3,10 +3,13 @@
 /**
  * Plugin Name: Debug File Viewer
  * Description: Adds a "tool" that displays <code>debug.log</code> in the back end of your site. Why? Because some hosts restrict access to this file, and going through SFTP to view it is a minor pain in the butt.
- * Version:     1.1.1
- * Author:      @chairmanbrando
+ * Version:     1.2.0
+ * Author:      Stovepipe
+ * Author URI:  https://stovepipeco.com/
  * Update URI:  false
  */
+
+namespace Stovepipe;
 
 if (! defined('ABSPATH')) exit;
 
@@ -26,7 +29,8 @@ class DebugFileViewer {
     private static $filepath;
     private static $fileurl;
     private static $filesize;
-    private static $lines;
+    private static $maxlines;
+    private static $curlines;
 
     public static function action() {
         add_action('wp_loaded',  __CLASS__ . '::wp_loaded');
@@ -76,6 +80,13 @@ class DebugFileViewer {
         self::redirect();
     }
 
+    private static function count_lines() {
+        $file = new \SplFileObject(self::$filepath, 'r');
+        $file->seek(PHP_INT_MAX);
+
+        return $file->key() + 1;
+    }
+
     private static function file_size() {
         $bytes  = filesize(self::$filepath);
         $factor = floor((strlen($bytes) - 1) / 3);
@@ -93,16 +104,29 @@ class DebugFileViewer {
         }
 
         self::$filesize = self::file_size();
-        self::$lines    = apply_filters('dfv_max_lines', DFV_MAX_LINES);
+        self::$curlines = self::count_lines();
+        self::$maxlines = apply_filters('dfv_max_lines', DFV_MAX_LINES);
     }
 
     private static function read_lines($num) {
         $file = new \SplFileObject(self::$filepath, 'r');
-
         $file->seek(PHP_INT_MAX);
 
-        $lines = new \LimitIterator($file, max(0, $file->key() - $num), $file->key());
-        $lines = iterator_to_array($lines);
+        try {
+            $last  = $file->key();
+            $start = max(0, $last - $num + 1);
+            $count = ($last >= $start) ? ($last - $start + 1) : 0;
+
+            if ($count <= 0) {
+                $lines = [];
+            } else {
+                $lines = new \LimitIterator($file, $start, $count);
+                $lines = iterator_to_array($lines);
+            }
+        } catch (\OutOfBoundsException $e) {
+            $lines = [];
+        }
+
         $file  = null;
 
         return apply_filters('dfv_read_lines', $lines);
@@ -114,9 +138,6 @@ class DebugFileViewer {
         }
 
         return false;
-
-        // Is this illegal? 🤔
-        return (true) ? exit : false;
     }
 
     // ----- @hooks ----------------------------------------------------------------------------- //
