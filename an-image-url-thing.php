@@ -6,11 +6,11 @@
  * Version:     1.2.3.4.5.6
  * Author:      chairmanbrando
  * Update URI:  false
- * 
+ *
  * Note: This is for the `mu-plugins` directory. By having it start with an "a"
  *       we get to execute quite early in the process. Yeah, you could probably
  *       make it run earlier by editing `wp-config.php`, but that's less cool.
- * 
+ *
  * Why: Your host almost certainly has asset file extensions (.png, .css, et
  *      al.) served statically. That's why we don't use 'em here. I suppose you
  *      could try making your own extension like `.yay` or something in those
@@ -30,7 +30,7 @@ else {
     return;
 }
 
-foreach (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'] as $ext) {
+foreach (['png', 'jpg', 'jpeg', 'mp4', 'gif', 'webp', 'svg'] as $ext) {
     $file = untrailingslashit($base_path) . '.' . $ext;
 
     if (file_exists($file)) {
